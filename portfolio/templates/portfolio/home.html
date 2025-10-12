@@ -1,0 +1,151 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Diego Narambuena</h1>
+        <p class="lead mb-4">Programador Full-Stack | Editor & Productor Audiovisual | Especialista en Inglés Técnico</p>
+        <a href="#about" class="btn btn-light btn-lg">Conoce Mi Trabajo</a>
+    </div>
+</section>
+
+<!-- Carrusel de Talentos -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Mis Talentos Destacados</h2>
+        {% if featured_projects %}
+        <div id="talentsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner rounded">
+                {% for project in featured_projects %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            {% if project.image %}
+                            <img src="{{ project.image.url }}" class="img-fluid rounded" alt="{{ project.title }}">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <h3>{{ project.title }}</h3>
+                            <p class="lead">{{ project.description }}</p>
+                            {% if project.url %}
+                            <a href="{{ project.url }}" class="btn btn-primary">Ver Proyecto</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#talentsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#talentsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Sección Sobre Mí -->
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="mb-4">Sobre Mí</h2>
+                <p class="lead">
+                    Combinó habilidades técnicas de programación con creatividad audiovisual y experiencia en enseñanza de inglés técnico. 
+                    Especializado en crear soluciones innovadoras que unen tecnología y arte.
+                </p>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <h4><i class="fas fa-laptop-code text-primary"></i> Tecnología</h4>
+                        <p>Desarrollo web, Python, Django, Bases de datos</p>
+                    </div>
+                    <div class="col-6">
+                        <h4><i class="fas fa-video text-danger"></i> Audiovisual</h4>
+                        <p>Edición, Drones, Producción, Postproducción</p>
+                    </div>
+                    <div class="col-6">
+                        <h4><i class="fas fa-music text-success"></i> Música</h4>
+                        <p>DAWs, Composición, Jingles, Producción</p>
+                    </div>
+                    <div class="col-6">
+                        <h4><i class="fas fa-globe text-info"></i> Inglés</h4>
+                        <p>Técnico, Preparación laboral, Asesoría</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Aquí puedes agregar tu foto -->
+                <div class="bg-secondary rounded" style="height: 400px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user fa-5x text-light"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sección de Servicios -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">¿En Qué Te Puedo Ayudar?</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card skill-card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-code fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Desarrollo Web</h5>
+                        <p class="card-text">Aplicaciones y sitios web personalizados con Django y tecnologías modernas.</p>
+                        <a href="{% url 'portfolio_category' 'code' %}" class="btn btn-outline-primary">Ver Proyectos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card skill-card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-film fa-3x text-danger mb-3"></i>
+                        <h5 class="card-title">Producción Audiovisual</h5>
+                        <p class="card-text">Edición de video, tomas con drone, contenido gaming y documental.</p>
+                        <a href="{% url 'portfolio_category' 'video' %}" class="btn btn-outline-danger">Ver Trabajos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card skill-card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-headphones fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Producción Musical</h5>
+                        <p class="card-text">Jingles, composiciones originales y producción en DAWs profesionales.</p>
+                        <a href="{% url 'portfolio_category' 'music' %}" class="btn btn-outline-success">Escuchar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sección Contacto -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Trabajemos Juntos</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="text-center lead">¿Tienes un proyecto en mente? ¡Hablemos!</p>
+                        <div class="text-center">
+                            <a href="mailto:diego.narambuena@gmail.com" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-envelope me-2"></i>Contáctame
+                            </a>
+                            <a href="https://wa.me/5492804552925" class="btn btn-success btn-lg">
+                                <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

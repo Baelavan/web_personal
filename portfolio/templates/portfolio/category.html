@@ -1,0 +1,48 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Portfolio - {{ category }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">
+            {% if category == 'code' %}💻 Programación
+            {% elif category == 'video' %}🎬 Edición de Video
+            {% elif category == 'music' %}🎵 Producción Musical
+            {% elif category == 'english' %}🌍 Inglés Técnico
+            {% elif category == 'consulting' %}💼 Asesoría
+            {% else %}{{ category|title }}{% endif %}
+        </h1>
+        
+        {% if projects %}
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                        {% if project.url %}
+                        <a href="{{ project.url }}" class="btn btn-primary" target="_blank">Ver proyecto</a>
+                        {% endif %}
+                        {% if project.video_url %}
+                        <a href="{{ project.video_url }}" class="btn btn-outline-primary" target="_blank">Ver video</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            Próximamente agregaré proyectos en esta categoría.
+        </div>
+        {% endif %}
+        
+        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">← Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}
