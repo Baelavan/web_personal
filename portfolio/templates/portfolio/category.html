@@ -15,22 +15,36 @@
         </h1>
         
         {% if projects %}
-        <div class="row">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {% for project in projects %}
-            <div class="col-md-6 mb-4">
-                <div class="card">
+            <div class="col">
+                <div class="card h-100 border-primary border-2 shadow-sm" style="border-top: 4px solid #0d6efd;">
                     {% if project.image %}
-                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    <div class="image-wrapper" style="overflow: hidden; border-bottom: 2px solid #0d6efd;">
+                        <img src="{{ project.image.url }}" class="card-img-top" style="height: 220px; object-fit: cover; transition: transform 0.3s ease;" alt="{{ project.title }}">
+                    </div>
                     {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ project.title }}</h5>
-                        <p class="card-text">{{ project.description }}</p>
-                        {% if project.url %}
-                        <a href="{{ project.url }}" class="btn btn-primary" target="_blank">Ver proyecto</a>
-                        {% endif %}
-                        {% if project.video_url %}
-                        <a href="{{ project.video_url }}" class="btn btn-outline-primary" target="_blank">Ver video</a>
-                        {% endif %}
+                    <div class="card-body d-flex flex-column" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
+                        <h5 class="card-title" style="border-left: 4px solid #0d6efd; padding-left: 12px; margin-bottom: 1rem; font-weight: 600;">
+                            {{ project.title }}
+                        </h5>
+                        <div class="description-box" style="background-color: #e7f1ff; padding: 12px; border-radius: 8px; border-left: 3px solid #0d6efd; margin-bottom: 1rem;">
+                            <p class="card-text" style="margin-bottom: 0; color: #1a1a2e; line-height: 1.5;">
+                                {{ project.description|truncatewords:35 }}
+                            </p>
+                        </div>
+                        <div class="mt-auto">
+                            {% if project.url %}
+                            <a href="{{ project.url }}" class="btn btn-primary btn-sm" target="_blank" style="border-radius: 20px; padding: 6px 18px;">
+                                🔗 Ver proyecto
+                            </a>
+                            {% endif %}
+                            {% if project.video_url %}
+                            <a href="{{ project.video_url }}" class="btn btn-outline-primary btn-sm" target="_blank" style="border-radius: 20px; margin-left: 8px;">
+                                🎬 Ver demo
+                            </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
